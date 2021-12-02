@@ -1,0 +1,47 @@
+.Home {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #E7E8DF;
+}
+
+.Home-intro {
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.68), rgba(0, 0, 0, 0.68)),
+    url("https://res.cloudinary.com/dfuxr1p10/image/upload/v1638411730/MoodMusic/background_hjgyzr.jpg");
+    background-position: center center;
+    background-size: cover;
+    height: 82vh;
+    justify-content: center;
+}
+
+.Home-title {
+    font-weight: 700;
+    font-size: 45px;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.Home-subtitle {
+    font-weight: 500;
+    font-size: 22px;
+    color: white;
+    margin-bottom: 60px;
+}
+
+.Home-btn {
+    background-color: #F73859;
+    border: none;
+    width: 240px;
+    height: 70px;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    border-radius: 17px;
+    cursor: pointer;
+}
+
+.Home-btn:hover {
+    background-color: #f96e86;
+}

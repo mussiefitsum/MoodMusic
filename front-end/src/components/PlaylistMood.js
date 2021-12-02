@@ -1,4 +1,3 @@
-import SpotifyWebApi from 'spotify-web-api-node';
 import { useEffect, useState } from 'react';
 
 export default function PlaylistMood() {

@@ -1,0 +1,13 @@
+html body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+}

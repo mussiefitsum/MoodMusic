@@ -1,0 +1,20 @@
+.Navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    background-color: #384259;
+    padding: 16px;
+}
+
+.Navbar-link {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+    margin-right: 5vw;
+}
+
+.Navbar-icon {
+    margin-left: 5vw;
+}

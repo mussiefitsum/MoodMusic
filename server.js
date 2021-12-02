@@ -29,15 +29,19 @@ const scopes = [
     'user-library-read'
 ];
 
+const showDialog = true;
+const state = 'chicken'
+
 const spotifyApi = new SpotifyWebApi({
     redirectUri: redirectUri,
     clientId: clientId,
-    clientSecret: clientSecret
+    clientSecret: clientSecret,
 });
 
+const authUrl = spotifyApi.createAuthorizeURL(scopes, state, showDialog);
 
 app.get('/login', (req, res) => {
-    res.redirect(spotifyApi.createAuthorizeURL(scopes));
+    res.redirect(authUrl);
 });
 
 app.get('/callback', (req, res, next) => {
