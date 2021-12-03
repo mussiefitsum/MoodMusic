@@ -1,0 +1,19 @@
+.PlaylistMood {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #E7E8DF;
+}
+
+.PlaylistMood-title {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.PlaylistMood-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+}

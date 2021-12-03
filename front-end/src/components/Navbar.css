@@ -15,6 +15,10 @@
     margin-right: 5vw;
 }
 
+.Navbar-link:hover {
+    color: #F73859;
+}
+
 .Navbar-icon {
     margin-left: 5vw;
 }

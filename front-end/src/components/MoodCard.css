@@ -1,0 +1,9 @@
+.MoodCard {
+    width: 320px;
+    height: 50vh;
+    color: white;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 600;
+    margin: 20px;
+}
