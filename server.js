@@ -88,30 +88,28 @@ app.get('/callback', (req, res, next) => {
         });
 });
 
-app.get('/playlists', async (req, res) => {
-    // if (!spotifyApi._credentials.accessToken) {
-    //     return res.redirect('http://localhost:3000/')
-    // }
-    // try {
-    //     const myTracks = await spotifyApi.getMyRecentlyPlayedTracks({ limit: 50 });
-    //     const songs = myTracks.body.items;
-    //     const songIds = [];
-    //     for (let song of songs) {
-    //         songIds.push(song.track.id);
-    //     }
-    //     const audioFeatureResults = await spotifyApi.getAudioFeaturesForTracks(songIds);
-    //     const trackInfo = await spotifyApi.getTracks(songIds);
-    //     const audioData = audioFeatureResults.body.audio_features;
-    //     const trackData = trackInfo.body.tracks;
-    //     for (let i = 0; i < audioData.length; i++) {
-    //         audioData[i].name = trackData[i].name;
-    //         audioData[i].artist = trackData[i].artists[0].name;
-    //         audioData[i].images = trackData[i].album.images;
-    //     }
-    //     res.json(audioData);
-    // } catch (err) {
-    //     console.log(err);
-    // }
+app.get('/trackhistory', async (req, res) => {
+    if (!spotifyApi._credentials.accessToken) {
+        return res.redirect('http://localhost:3000/')
+    }
+    try {
+        const myTracks = await spotifyApi.getMySavedTracks({ limit: 50 });
+        const trackHistory = await spotifyApi.getMyRecentlyPlayedTracks({ limit: 49 });
+        const songs = myTracks.body.items.concat(trackHistory.body.items);
+        const songIds = [];
+        for (let song of songs) {
+            songIds.push(song.track.id);
+        }
+        const audioFeatureResults = await spotifyApi.getAudioFeaturesForTracks(songIds);
+        const audioData = audioFeatureResults.body.audio_features;
+        let finalTrackData = [];
+        for (let i = 0; i < audioData.length; i++) {
+            finalTrackData.push({ ...songs[i], ...audioData[i] });
+        }
+        res.json(finalTrackData);
+    } catch (err) {
+        console.log(err);
+    }
 })
 
 app.get('*', (req, res) => {
