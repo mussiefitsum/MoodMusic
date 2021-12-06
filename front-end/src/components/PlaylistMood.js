@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import MoodCard from './MoodCard';
 import './PlaylistMood.css'
+import FinalPlaylist from './FinalPlaylist'
+import { shufflePlaylist } from '../utilities/organizePlaylist';
 
 const chillImage = 'https://res.cloudinary.com/dfuxr1p10/image/upload/v1638496617/MoodMusic/chill_kd1pyi.jpg';
 const hypeImage = 'https://res.cloudinary.com/dfuxr1p10/image/upload/v1638646526/MoodMusic/pumped_rhax1b.jpg';
@@ -10,13 +12,17 @@ export default function PlaylistMood() {
     const [tracks, setTracks] = useState();
     const [isLoading, setLoading] = useState(true);
     const [playlist, setPlaylist] = useState();
+    const [playlistType, setPlaylistType] = useState('');
     useEffect(() => {
         const fetchTracks = async () => {
             try {
                 const res = await fetch('http://localhost:3001/trackhistory');
                 const myTracks = await res.json();
-                console.log(myTracks);
-                setTracks(myTracks);
+                const uniqueTracks = myTracks.filter((song, index, self) =>
+                    index === self.findIndex((s) => (s.id === song.id && s.track.name === song.track.name))
+                )
+                console.log(uniqueTracks);
+                setTracks(uniqueTracks);
                 setLoading(false);
             } catch (err) {
                 console.log(err);
@@ -29,32 +35,51 @@ export default function PlaylistMood() {
         return arr.filter(song => (song.danceability > 0.7 && song.energy > 0.6) || song.danceability > 0.8);
     }
     const handleDance = () => {
+        setLoading(true);
         const dance = dancePlaylist(tracks);
-        console.log(dance);
+        setPlaylist(shufflePlaylist(dance));
+        setPlaylistType(`Let's Dance`);
+        setLoading(false);
     }
     const pumpedPlaylist = (arr) => {
-        return arr.filter(song => (song.energy > .75 && song.danceability < .5) || song.energy > .85)
+        return arr.filter(song => (song.energy > .75 && song.danceability < .5) || song.energy > .85);
     }
     const handlePump = () => {
+        setLoading(true);
         const pump = pumpedPlaylist(tracks);
-        console.log(pump);
+        setPlaylist(shufflePlaylist(pump));
+        setPlaylistType('Get Pumped');
+        setLoading(false);
     }
 
     const chillPlaylist = (arr) => {
         return arr.filter(song => song.danceability < 0.7 && song.energy < 0.6)
     }
     const handleChill = () => {
+        setLoading(true);
         const chill = chillPlaylist(tracks);
-        console.log(chill);
+        setPlaylist(shufflePlaylist(chill));
+        setPlaylistType('Chill');
+        setLoading(false);
     }
-
-    return (
-        <div className="PlaylistMood">
-            {isLoading ?
+    if (isLoading) {
+        return (
+            <div className="PlaylistMood">
                 <div className="PlaylistMood-loading">
                     <div className="PlaylistMood-loader"></div>
+                    <h1 className="PlaylistMood-loader-message">Loading Saved and Recently Played Tracks</h1>
                 </div>
-                :
+            </div>
+        )
+    } else if (playlist !== undefined) {
+        return (
+            <div className="PlaylistMood">
+                <FinalPlaylist playlist={playlist} playlistType={playlistType} />
+            </div>
+        )
+    } else {
+        return (
+            <div className="PlaylistMood">
                 <div className="PlaylistMood-content">
                     <h1 className="PlaylistMood-title">Choose Your Vibe</h1>
                     <div className="PlaylistMood-container">
@@ -63,7 +88,7 @@ export default function PlaylistMood() {
                         <MoodCard text="Let's Dance" img={dancingImage} makePlaylist={handleDance} />
                     </div>
                 </div>
-            }
-        </div>
-    )
+            </div>
+        )
+    }
 }

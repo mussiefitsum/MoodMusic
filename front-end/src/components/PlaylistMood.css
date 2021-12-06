@@ -44,3 +44,8 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+  .PlaylistMood-loader-message {
+      font-size: 30px;
+      font-weight: 700;
+  }
