@@ -112,6 +112,10 @@ app.get('/trackhistory', async (req, res) => {
     }
 })
 
+app.post('/playlist', (req, res) => {
+    console.log(req.body);
+})
+
 app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, './front-end/build', 'index.html'));
 });

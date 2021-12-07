@@ -1,0 +1,86 @@
+.PopUp {
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.PopUp-content {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #384259;
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    width: 40%;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0px 8px 0 rgb(0 0 0 / 20%);
+}
+
+.PopUp-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    width: 100%;
+}
+
+.PopUp-cancel {
+    justify-self: flex-start;
+    text-align: right;
+}
+
+.fa-times-circle {
+    color: #F73859;
+    font-size: 27px;
+    cursor: pointer;
+}
+
+.PopUp-form-group {
+    width: 90%;
+    margin-bottom: 40px;
+}
+
+.PopUp-form-label {
+    color: white;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.PopUp-form-input {
+    width: 100%;
+    border: none;
+    border-radius: 15px;
+    height: 30px;
+}
+
+.PopUp-form-textarea {
+    width: 100%;
+    height: 10vh;
+    border-radius: 15px;
+    border: none;
+}
+
+.PopUp-form-button {
+    background-color: #F73859;
+    border: none;
+    width: 75%;
+    height: 55px;
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    border-radius: 17px;
+    cursor: pointer;
+    margin-bottom: 25px;
+}
+
+.PopUp-form-button:hover {
+    background-color: #f96e86;
+}
