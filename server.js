@@ -112,8 +112,32 @@ app.get('/trackhistory', async (req, res) => {
     }
 })
 
-app.post('/playlist', (req, res) => {
-    console.log(req.body);
+app.post('/playlist', async (req, res) => {
+    if (!spotifyApi._credentials.accessToken) {
+        return res.redirect('http://localhost:3000/')
+    }
+    const playlist = req.body.playlist.split(',');
+    const name = req.body.name !== '' ? req.body.name : 'Mood Mix';
+    const description = req.body.description !== '' ? req.body.description : 'An automatically generated playlist from Mood Music';
+    try {
+        const myPlaylist = await spotifyApi.createPlaylist(name, { 'description': description });
+        await spotifyApi.addTracksToPlaylist(myPlaylist.body.id, playlist);
+        app.set('playlist_id', myPlaylist.body.id);
+        res.redirect('http://localhost:3000/complete')
+    } catch (err) {
+        console.log(err);
+        res.redirect('http://localhost:3000/');
+    }
+})
+
+app.get('/playlist', async (req, res) => {
+    const myPlaylistId = app.get('playlist_id');
+    try {
+        const myPlaylist = await spotifyApi.getPlaylist(myPlaylistId);
+        res.json(myPlaylist);
+    } catch (err) {
+        res.redirect('http://localhost:3000/');
+    }
 })
 
 app.get('*', (req, res) => {
