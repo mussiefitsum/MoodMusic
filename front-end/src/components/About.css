@@ -1,0 +1,21 @@
+.About {
+    text-align: center;
+    height: 100vh;
+}
+
+.About-title {
+    font-size: 45px;
+}
+
+.About-img {
+    width: 400px;
+}
+
+.About-text {
+    font-size: 19px;
+}
+
+.About-intro {
+    display: flex;
+
+}

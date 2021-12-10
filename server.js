@@ -136,7 +136,7 @@ app.get('/playlist', async (req, res) => {
         const myPlaylist = await spotifyApi.getPlaylist(myPlaylistId);
         res.json(myPlaylist);
     } catch (err) {
-        res.redirect('http://localhost:3000/');
+        console.log(err);
     }
 })
 

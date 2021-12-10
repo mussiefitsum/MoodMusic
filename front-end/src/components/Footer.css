@@ -1,0 +1,25 @@
+.Footer {
+    background-color: #191919;
+    margin-top: auto;
+    padding: 8px;
+    text-align: center;
+}
+
+.Footer-info {
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.Footer-credit {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -20px;
+}
+
+.Footer-spotify {
+    width: 30px;
+    margin-left: 10px;
+}
