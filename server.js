@@ -7,6 +7,7 @@ const session = require('cookie-session');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const secure = require('ssl-express-www')
+const bodyParser = require('body-parser');
 
 const app = express();
 
