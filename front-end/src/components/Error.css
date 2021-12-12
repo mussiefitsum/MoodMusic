@@ -1,0 +1,31 @@
+.Error {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.Error-alert {
+    margin-top: -20px;
+    width: 50vw;
+    border-radius: 13px;
+    background-color: #f8d7da;
+    padding: 50px 30px;
+}
+
+.Error-alert p {
+    font-size: 18px;
+}
+
+.Error-alert i {
+    font-size: 50px;
+    color: #384259;
+}
+
+@media (max-width: 500px) {
+    .Success-error-alert {
+        width: 75vw;
+    }
+}

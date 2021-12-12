@@ -37,10 +37,10 @@
 .FinalPlaylist-track {
     display: flex;
     justify-content: flex-start;
+    align-items: stretch;
     background-color: rgb(238, 102, 124);
-    width: 60vw;
+    width: 70vw;
     margin-bottom: 15px;
-    height: fit-content;
     border-radius: 13px;
     box-shadow: 0 0px 8px 0 rgb(0 0 0 / 20%);
     transition: transform 0.2s ease;
@@ -58,10 +58,12 @@
 }
 
 .FinalPlaylist-track i {
-    justify-self: stretch;
+    justify-self: flex-end;
     align-self: center;
     color: #384259;
     font-size: 40px;
+    margin-left: auto;
+    margin-right: 28px;
 }
 
 .FinalPlaylist-track-info {
@@ -70,14 +72,50 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 75%;
 }
 
-.FinalPlaylist-track-info h3 {
+.FinalPlaylist-track-name {
     font-size: 22px;
     margin-bottom: 0;
 }
 
 .FinalPlaylist-tracklink {
     text-decoration: none;
+}
+
+@media (max-width: 558px) {
+    .FinalPlaylist-title {
+        font-size: 30px;
+    }
+
+    .FinalPlaylist-track {
+        width: 80vw;
+        height: 60px;
+    }
+
+
+    .FinalPlaylist-track img {
+        width: 60px;
+    }
+
+    .FinalPlaylist-track-name {
+        font-size: 10px;
+        line-height: 1;
+        margin-bottom: -10px;
+    }
+
+    .FinalPlaylist-track-artist {
+        font-size: 9px;
+    }
+
+    .FinalPlaylist-track i {
+        font-size: 25px;
+        margin-right: 15px;
+    }
+
+    .FinalPlaylist-button {
+        width: 220px;
+        height: 50px;
+        font-size: 15px;
+    }
 }

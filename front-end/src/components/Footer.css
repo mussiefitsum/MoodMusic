@@ -23,3 +23,13 @@
     width: 30px;
     margin-left: 10px;
 }
+
+@media (max-width: 355px) {
+    .Footer-info {
+        font-size: 14px;
+    }
+
+    .Footer-spotify {
+        width: 25px;
+    }
+}

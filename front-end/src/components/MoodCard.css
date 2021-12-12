@@ -19,8 +19,14 @@
     transform: scale(1.1);
 }
 
+@media (max-width: 800px) {
+    .MoodCard {
+        width: 550px;
+    }   
+}
+
 @media (max-width: 530px) {
     .MoodCard {
-        width: 270px;
+        width: 260px;
     }
 }

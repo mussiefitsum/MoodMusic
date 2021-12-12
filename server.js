@@ -109,6 +109,7 @@ app.get('/trackhistory', async (req, res) => {
         res.json(finalTrackData);
     } catch (err) {
         console.log(err);
+        res.sendStatus(401);
     }
 })
 
@@ -137,6 +138,7 @@ app.get('/playlist', async (req, res) => {
         res.json(myPlaylist);
     } catch (err) {
         console.log(err);
+        res.sendStatus(401);
     }
 })
 

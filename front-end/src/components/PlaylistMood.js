@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import MoodCard from './MoodCard';
-import './PlaylistMood.css'
+import Error from './Error'
 import FinalPlaylist from './FinalPlaylist'
+import Loader from './Loader'
+import './PlaylistMood.css'
 import { shufflePlaylist } from '../utilities/organizePlaylist';
 
 const chillImage = 'https://res.cloudinary.com/dfuxr1p10/image/upload/v1638496617/MoodMusic/chill_kd1pyi.jpg';
@@ -11,26 +13,35 @@ const dancingImage = 'https://res.cloudinary.com/dfuxr1p10/image/upload/v1638496
 export default function PlaylistMood() {
     const [tracks, setTracks] = useState();
     const [isLoading, setLoading] = useState(true);
+    const [isSuccess, setSuccess] = useState();
     const [playlist, setPlaylist] = useState();
     const [playlistType, setPlaylistType] = useState('');
     useEffect(() => {
         const fetchTracks = async () => {
             try {
                 const res = await fetch('http://localhost:3001/trackhistory');
-                const myTracks = await res.json();
-                const uniqueTracks = myTracks.filter((song, index, self) =>
-                    index === self.findIndex((s) => (s.id === song.id && s.track.name === song.track.name))
-                )
-                console.log(uniqueTracks);
-                setTracks(uniqueTracks);
-                setLoading(false);
+                if (res.status >= 400 && res.status < 600) {
+                    throw new Error('Something went wrong when fetching your tracks')
+                } else {
+                    const myTracks = await res.json();
+                    const uniqueTracks = myTracks.filter((song, index, self) =>
+                        index === self.findIndex((s) => (s.id === song.id && s.track.name === song.track.name))
+                    )
+                    console.log(uniqueTracks);
+                    setTracks(uniqueTracks);
+                    setSuccess(true);
+                    setLoading(false);
+                }
+
             } catch (err) {
                 console.log(err);
-                window.location = '/'
+                setSuccess(false);
+                setLoading(false);
             }
         }
         fetchTracks();
     }, [])
+    const errMsg = 'Failed to fetch your tracks';
     const dancePlaylist = (arr) => {
         return arr.filter(song => (song.danceability > 0.7 && song.energy > 0.6) || song.danceability > 0.8);
     }
@@ -65,12 +76,11 @@ export default function PlaylistMood() {
     if (isLoading) {
         return (
             <div className="PlaylistMood">
-                <div className="PlaylistMood-loading">
-                    <div className="PlaylistMood-loader"></div>
-                    <h1 className="PlaylistMood-loader-message">Loading Saved and Recently Played Tracks</h1>
-                </div>
+                <Loader message="Loading Saved and Recently Played Tracks..." />
             </div>
         )
+    } else if (!isSuccess) {
+        return <Error message={errMsg} />;
     } else if (playlist !== undefined) {
         return (
             <div className="PlaylistMood">

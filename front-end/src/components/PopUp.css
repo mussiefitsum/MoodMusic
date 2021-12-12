@@ -32,6 +32,16 @@
     width: 100%;
 }
 
+input {
+    font-family: proxima-nova, sans-serif;
+    font-size: 17px;
+}
+
+textarea {
+    font-family: proxima-nova, sans-serif;
+    font-size: 17px;
+}
+
 .PopUp-cancel {
     justify-self: flex-start;
     text-align: right;
@@ -84,3 +94,10 @@
 .PopUp-form-button:hover {
     background-color: #f96e86;
 }
+
+@media (max-width: 558px) {
+    .PopUp-content {
+        width: 80vw;
+        left: 4%;
+    }
+} 
