@@ -8,7 +8,7 @@ class Home extends React.Component {
                 <div className="Home-intro">
                     <h1 className="Home-title">Welcome to Mood Music</h1>
                     <h4 className="Home-subtitle">Choose a vibe, we make the playlist!</h4>
-                    <form action="http://localhost:3001/login">
+                    <form action={`${ process.env.REACT_APP_BASE_URL }/login` || 'http://localhost:3001/login'}>
                         <button className="Home-btn">Login with Spotify</button>
                     </form>
                 </div>
