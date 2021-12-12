@@ -77,20 +77,11 @@ app.get('/callback', (req, res, next) => {
             spotifyApi.setAccessToken(access_token);
             spotifyApi.setRefreshToken(refresh_token);
 
-            console.log('access_token:', access_token);
-            console.log('refresh_token:', refresh_token);
-
-            console.log(
-                `Sucessfully retreived access token. Expires in ${ expires_in } s.`
-            );
             res.redirect('/playlists' || 'http://localhost:3000/playlists');
 
             setInterval(async () => {
                 const data = await spotifyApi.refreshAccessToken();
                 const access_token = data.body['access_token'];
-
-                console.log('The access token has been refreshed!');
-                console.log('access_token:', access_token);
                 spotifyApi.setAccessToken(access_token);
             }, expires_in / 2 * 1000);
         })
@@ -120,7 +111,6 @@ app.get('/trackhistory', async (req, res) => {
         }
         res.json(finalTrackData);
     } catch (err) {
-        console.log(err);
         res.sendStatus(401);
     }
 })
@@ -138,7 +128,6 @@ app.post('/myplaylist', async (req, res) => {
         app.set('playlist_id', myPlaylist.body.id);
         res.redirect('/complete' || 'http://localhost:3000/complete')
     } catch (err) {
-        console.log(err);
         res.redirect('/' || 'http://localhost:3000/');
     }
 })
@@ -149,7 +138,6 @@ app.get('/myplaylist', async (req, res) => {
         const myPlaylist = await spotifyApi.getPlaylist(myPlaylistId);
         res.json(myPlaylist);
     } catch (err) {
-        console.log(err);
         res.sendStatus(401);
     }
 })
