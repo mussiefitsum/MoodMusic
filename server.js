@@ -11,10 +11,9 @@ const secure = require('ssl-express-www')
 const app = express();
 
 const secret = process.env.COOKIE_SECRET || 'topsecret100'
-app.use(express);
+app.use(secure);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
 app.use(session({
     genid: function (req) {
         return uuidv4()
