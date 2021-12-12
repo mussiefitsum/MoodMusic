@@ -5,15 +5,13 @@ const express = require('express');
 const SpotifyWebApi = require('spotify-web-api-node');
 const session = require('cookie-session');
 const path = require('path');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const querystring = require('querystring');
 const { v4: uuidv4 } = require('uuid');
+const secure = require('ssl-express-www')
 
 const app = express();
 
 const secret = process.env.COOKIE_SECRET || 'topsecret100'
-
+app.use(express);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
