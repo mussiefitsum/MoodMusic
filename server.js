@@ -3,7 +3,7 @@ if (process.env.NODE_ENV !== "production") {
 }
 const express = require('express');
 const SpotifyWebApi = require('spotify-web-api-node');
-const session = require('express-session');
+const session = require('cookie-session');
 const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
