@@ -11,6 +11,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+app.use(express.static(path.resolve(__dirname, './front-end/build')));
 const secret = process.env.COOKIE_SECRET || 'topsecret100'
 app.use(secure);
 app.use(express.json());
@@ -24,7 +25,7 @@ app.use(session({
     secret: secret
 }))
 app.use(bodyParser.json());
-app.use(express.static(path.resolve(__dirname, './front-end/build')));
+
 
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
