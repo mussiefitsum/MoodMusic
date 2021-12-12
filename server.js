@@ -32,11 +32,8 @@ const clientSecret = process.env.CLIENT_SECRET;
 const redirectUri = process.env.REDIRECT_URI;
 
 const scopes = [
-    'playlist-modify-private',
     'playlist-modify-public',
     'user-read-recently-played',
-    'user-read-private',
-    'user-read-email',
     'user-library-read'
 ];
 
@@ -125,9 +122,9 @@ app.post('/myplaylist', async (req, res) => {
         const myPlaylist = await spotifyApi.createPlaylist(name, { 'description': description });
         await spotifyApi.addTracksToPlaylist(myPlaylist.body.id, playlist);
         app.set('playlist_id', myPlaylist.body.id);
-        res.redirect('/complete' || 'http://localhost:3000/complete')
+        res.redirect('/complete');
     } catch (err) {
-        res.redirect('/' || 'http://localhost:3000/');
+        res.redirect('/');
     }
 })
 
