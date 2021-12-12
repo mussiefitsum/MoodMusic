@@ -19,7 +19,7 @@ export default function PlaylistMood() {
     useEffect(() => {
         const fetchTracks = async () => {
             try {
-                const res = await fetch(`${ process.env.REACT_APP_BASE_URL }/trackhistory` || 'http://localhost:3001/trackhistory');
+                const res = await fetch('/trackhistory');
                 if (res.status >= 400 && res.status < 600) {
                     throw new Error('Something went wrong when fetching your tracks')
                 } else {
