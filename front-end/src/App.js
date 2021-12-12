@@ -6,6 +6,7 @@ import PlaylistMood from './components/PlaylistMood';
 import Success from './components/Success';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import NotFound from './components/NotFound';
 import './App.css'
 
 
@@ -22,6 +23,7 @@ class App extends React.Component {
             <Route path="complete" element={<Success />} />
             <Route path="about" element={<About />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </div>

@@ -3,16 +3,28 @@ if (process.env.NODE_ENV !== "production") {
 }
 const express = require('express');
 const SpotifyWebApi = require('spotify-web-api-node');
+const session = require('express-session');
 const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const querystring = require('querystring');
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
+
+const secret = process.env.COOKIE_SECRET || 'topsecret100'
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use(session({
+    genid: function (req) {
+        return uuidv4()
+    },
+    resave: false,
+    saveUninitialized: false,
+    secret: secret
+}))
 app.use(bodyParser.json());
 app.use(express.static(path.resolve(__dirname, './front-end/build')));
 
@@ -30,7 +42,6 @@ const scopes = [
 ];
 
 const showDialog = true;
-const state = 'chicken'
 
 const spotifyApi = new SpotifyWebApi({
     redirectUri: redirectUri,
@@ -38,9 +49,10 @@ const spotifyApi = new SpotifyWebApi({
     clientSecret: clientSecret,
 });
 
-const authUrl = spotifyApi.createAuthorizeURL(scopes, state, showDialog);
 
 app.get('/login', (req, res) => {
+    const state = req.sessionID
+    const authUrl = spotifyApi.createAuthorizeURL(scopes, state, showDialog);
     res.redirect(authUrl);
 });
 
@@ -71,7 +83,7 @@ app.get('/callback', (req, res, next) => {
             console.log(
                 `Sucessfully retreived access token. Expires in ${ expires_in } s.`
             );
-            res.redirect('http://localhost:3000/playlists');
+            res.redirect('/playlists' || 'http://localhost:3000/playlists');
 
             setInterval(async () => {
                 const data = await spotifyApi.refreshAccessToken();
@@ -90,7 +102,7 @@ app.get('/callback', (req, res, next) => {
 
 app.get('/trackhistory', async (req, res) => {
     if (!spotifyApi._credentials.accessToken) {
-        return res.redirect('http://localhost:3000/')
+        return res.redirect('/' || 'http://localhost:3000/')
     }
     try {
         const myTracks = await spotifyApi.getMySavedTracks({ limit: 50 });
@@ -113,7 +125,7 @@ app.get('/trackhistory', async (req, res) => {
     }
 })
 
-app.post('/playlist', async (req, res) => {
+app.post('/myplaylist', async (req, res) => {
     if (!spotifyApi._credentials.accessToken) {
         return res.redirect('http://localhost:3000/')
     }
@@ -124,14 +136,14 @@ app.post('/playlist', async (req, res) => {
         const myPlaylist = await spotifyApi.createPlaylist(name, { 'description': description });
         await spotifyApi.addTracksToPlaylist(myPlaylist.body.id, playlist);
         app.set('playlist_id', myPlaylist.body.id);
-        res.redirect('http://localhost:3000/complete')
+        res.redirect('/complete' || 'http://localhost:3000/complete')
     } catch (err) {
         console.log(err);
-        res.redirect('http://localhost:3000/');
+        res.redirect('/' || 'http://localhost:3000/');
     }
 })
 
-app.get('/playlist', async (req, res) => {
+app.get('/myplaylist', async (req, res) => {
     const myPlaylistId = app.get('playlist_id');
     try {
         const myPlaylist = await spotifyApi.getPlaylist(myPlaylistId);

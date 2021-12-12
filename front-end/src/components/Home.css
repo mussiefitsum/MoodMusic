@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    background-color: #E7E8DF;
 }
 
 .Home-intro {
@@ -45,4 +44,14 @@
 
 .Home-btn:hover {
     background-color: #f96e86;
+}
+
+@media (max-width: 500px) {
+    .Home-title {
+        font-size: 35px;
+    }
+
+    .Home-subtitle {
+        font-size: 18px;
+    }
 }

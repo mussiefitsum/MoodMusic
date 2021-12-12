@@ -10,7 +10,7 @@ export default function Success() {
     useEffect(() => {
         const fetchPlaylist = async () => {
             try {
-                const res = await fetch('http://localhost:3001/playlist');
+                const res = await fetch('http://localhost:3001/myplaylist');
                 if (res.status >= 400 && res.status < 600) {
                     throw new Error('Something went wrong')
                 } else {
