@@ -41,7 +41,6 @@
     background-color: rgb(238, 102, 124);
     width: 70vw;
     margin-bottom: 15px;
-    border-radius: 13px;
     box-shadow: 0 0px 8px 0 rgb(0 0 0 / 20%);
     transition: transform 0.2s ease;
 }
@@ -51,8 +50,6 @@
 }
 
 .FinalPlaylist-track-img {
-    border-top-left-radius: 13px;
-    border-bottom-left-radius: 13px;
     width: 120px;
     margin-right: 20px;
 }
