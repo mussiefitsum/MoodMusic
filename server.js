@@ -8,8 +8,16 @@ const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const secure = require('ssl-express-www')
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
+
+const corsOptions = {
+    origin: '*',
+    credentials: true,
+    optionSuccessStatus: 200,
+}
+
 
 app.use(express.static(path.resolve(__dirname, './front-end/build')));
 const secret = process.env.COOKIE_SECRET || 'topsecret100'
@@ -25,11 +33,14 @@ app.use(session({
     secret: secret
 }))
 app.use(bodyParser.json());
+app.use(cors(corsOptions));
 
 
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
 const redirectUri = process.env.REDIRECT_URI;
+const isDevelopment = process.env.NODE_ENV === undefined;
+console.log(process.env.NODE_ENV);
 
 const scopes = [
     'playlist-modify-public',
@@ -73,8 +84,8 @@ app.get('/callback', (req, res, next) => {
             spotifyApi.setAccessToken(access_token);
             spotifyApi.setRefreshToken(refresh_token);
 
-            res.redirect('/playlists' || 'http://localhost:3000/playlists');
-
+            res.redirect(isDevelopment ? 'http://localhost:3000/playlists' : '/playlists');
+            console.log(isDevelopment)
             setInterval(async () => {
                 const data = await spotifyApi.refreshAccessToken();
                 const access_token = data.body['access_token'];
@@ -89,7 +100,7 @@ app.get('/callback', (req, res, next) => {
 
 app.get('/trackhistory', async (req, res) => {
     if (!spotifyApi._credentials.accessToken) {
-        return res.redirect('/' || 'http://localhost:3000/')
+        return res.redirect(isDevelopment ? 'http://localhost:3000/' : '/')
     }
     try {
         const myTracks = await spotifyApi.getMySavedTracks({ limit: 50 });
@@ -113,7 +124,7 @@ app.get('/trackhistory', async (req, res) => {
 
 app.post('/myplaylist', async (req, res) => {
     if (!spotifyApi._credentials.accessToken) {
-        return res.redirect('http://localhost:3000/')
+        return res.redirect(isDevelopment ? 'http://localhost:3000/' : '/')
     }
     const playlist = req.body.playlist.split(',');
     const name = req.body.name !== '' ? req.body.name : 'Mood Mix';
@@ -124,7 +135,7 @@ app.post('/myplaylist', async (req, res) => {
         app.set('playlist_id', myPlaylist.body.id);
         res.redirect('/complete');
     } catch (err) {
-        res.redirect('/');
+        res.redirect(isDevelopment ? 'http://localhost:3000/' : '/');
     }
 })
 

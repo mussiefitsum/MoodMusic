@@ -1,5 +1,6 @@
 .PlaylistMood {
     background-color: #E7E8DF;
+    min-height: 100vh;
 }
 
 .PlaylistMood-content {

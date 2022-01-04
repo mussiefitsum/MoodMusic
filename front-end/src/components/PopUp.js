@@ -17,7 +17,7 @@ export default function PopUp({ togglePopUp, playlist }) {
                 <div className="PopUp-cancel">
                     <i onClick={togglePopUp} className="fas fa-times-circle"></i>
                 </div>
-                <form className="PopUp-form" method="POST" action="/myplaylist">
+                <form className="PopUp-form" method="POST" action={process.env.NODE_ENV === 'development' ? 'http://localhost:3001/myplaylist' : '/myplaylist'}>
                     <div className="PopUp-form-group">
                         <label htmlFor="name" className="PopUp-form-label">Playlist Name</label>
                         <br />
