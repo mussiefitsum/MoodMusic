@@ -6,9 +6,9 @@ import Loader from './Loader'
 import './PlaylistMood.css'
 import { shufflePlaylist } from '../utilities/organizePlaylist';
 
-const chillImage = 'https://res.cloudinary.com/dfuxr1p10/image/upload/v1638496617/MoodMusic/chill_kd1pyi.jpg';
-const hypeImage = 'https://res.cloudinary.com/dfuxr1p10/image/upload/v1638646526/MoodMusic/pumped_rhax1b.jpg';
-const dancingImage = 'https://res.cloudinary.com/dfuxr1p10/image/upload/v1638496618/MoodMusic/dancing_tutetk.jpg';
+const chillImage = 'https://res.cloudinary.com/dfuxr1p10/image/upload/v1642817347/MoodMusic/chill_kd1pyi_rnhxfd.jpg';
+const hypeImage = 'https://res.cloudinary.com/dfuxr1p10/image/upload/v1642817333/MoodMusic/pumped_rhax1b_mbikkx.jpg';
+const dancingImage = 'https://res.cloudinary.com/dfuxr1p10/image/upload/v1642817351/MoodMusic/dancing_tutetk_r8gaq3.jpg';
 
 export default function PlaylistMood() {
     const [tracks, setTracks] = useState();

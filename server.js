@@ -39,8 +39,7 @@ app.use(cors(corsOptions));
 const clientId = process.env.CLIENT_ID;
 const clientSecret = process.env.CLIENT_SECRET;
 const redirectUri = process.env.REDIRECT_URI;
-const isDevelopment = process.env.NODE_ENV === undefined;
-console.log(process.env.NODE_ENV);
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 const scopes = [
     'playlist-modify-public',
@@ -85,7 +84,6 @@ app.get('/callback', (req, res, next) => {
             spotifyApi.setRefreshToken(refresh_token);
 
             res.redirect(isDevelopment ? 'http://localhost:3000/playlists' : '/playlists');
-            console.log(isDevelopment)
             setInterval(async () => {
                 const data = await spotifyApi.refreshAccessToken();
                 const access_token = data.body['access_token'];

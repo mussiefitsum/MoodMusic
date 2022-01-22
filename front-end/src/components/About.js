@@ -5,7 +5,7 @@ export default function About() {
         <div className="About">
             <h1 className="About-title">About</h1>
             <div className="About-container">
-                <img className="About-img" src="https://res.cloudinary.com/dfuxr1p10/image/upload/v1639249907/MoodMusic/spotify-playlist_imztwv.jpg" alt="" />
+                <img className="About-img" src="https://res.cloudinary.com/dfuxr1p10/image/upload/v1642817360/MoodMusic/spotify-playlist_imztwv_lwkjfb.jpg" alt="" />
                 <div className="About-text">
                     <h3 className="About-subhead">The Tech</h3>
                     <p>Mood Music is a web application built with <strong>ExpressJS</strong>, <strong>ReactJS</strong>, and <strong>the Spotify API</strong>.

@@ -13,7 +13,6 @@
 .PopUp-content {
     display: flex;
     flex-direction: column;
-    width: 100%;
     background-color: #384259;
     position: absolute;
     top: 20%;
