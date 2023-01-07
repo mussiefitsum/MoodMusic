@@ -2,7 +2,7 @@
 ## Description:
 Mood Music is a web app that uses the Spotify API to automatically generate playlists for users by pulling their recently played and saved tracks. Users will have a choice between three moods: Chill, Get Pumped, and Let's Dance.
 
-Demo Link: https://moood-music.herokuapp.com/
+Demo Link: https://mood-music.onrender.com/
 
 ## Technologies Used:
 - ExpressJS
