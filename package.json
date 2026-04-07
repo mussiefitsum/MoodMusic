@@ -9,7 +9,7 @@
     "build": "npm install && cd front-end && npm install && npm run build"
   },
   "engines": {
-    "node": "24x"
+    "node": "24.x"
   },
   "repository": {
     "type": "git",
